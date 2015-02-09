@@ -1,0 +1,192 @@
+body {
+    background: url('../images/bg.png');
+}
+#zen2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50px -50px;
+}
+.zen2 {
+    display: inline-block;
+    position: relative;
+    padding: 2px;
+    width: 100px;
+    height: 100px;
+    text-align: left;
+    border-radius: 100px;
+    background-color: #000;
+    box-shadow: rgba(255, 255, 255, .8) 0 2px 3px, rgba(0, 0, 0, .5) 0 -1px 2px;
+}
+.zen2 .player {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+.zen2:before {
+    display: inline-block;
+    content: '';
+    position: absolute;
+    z-index: -1;
+    margin: -25px 0 0 -25px;
+    width: 150px;
+    height: 150px;
+    
+    border-radius: 100px;
+    background: hsla(0, 0%, 0%, .05);
+    background: -webkit-gradient(radial, center top, 150, center top, 0, from(hsla(0, 0%, 100%, .5)), to(hsla(0, 0%, 50%, .1)));
+    background: -webkit-radial-gradient(50% 0 180deg, circle farthest-side, hsla(0, 0%, 50%, .05), hsla(0, 0%, 100%, .4));
+    background:         radial-gradient(50% 0 180deg, circle farthest-side, hsla(0, 0%, 50%, .05), hsla(0, 0%, 100%, .4));
+}
+
+/*button*/
+.zen2 .player, .zen2 .button, .zen2 .progress, .zen2 .buffer, .zen2 .drag, .zen2 .play, .zen2 .pause, .zen2 .circle {
+    overflow: hidden;
+    border-radius: 50px;
+}
+.zen2 .button {  
+    display: inline-block;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    border: none;
+    background: hsla(0, 0%, 50%, 1);
+    background: #000 -webkit-gradient(radial, center top, 200, center top, 20, from(hsla(0, 0%, 100%, 0)), to(hsla(0, 0%, 100%, .65)));   
+    background: #000 -webkit-radial-gradient(50% 0 180deg, circle farthest-side, rgba(255, 255, 255, .65) 20%, rgba(255, 255, 255, .35) 100%);
+    background: #000         radial-gradient(50% 0 180deg, circle farthest-side, rgba(255, 255, 255, .65) 20%, rgba(255, 255, 255, .35) 100%);
+            box-shadow: inset rgba(0, 0, 0, 0.2) 0 -3px 4px 1px, inset rgba(252, 255, 255, 0.4) 0 2px 8px 0px, rgba(0, 0, 0, .8) 0 3px 8px -1px;
+    -webkit-transition: -webkit-transform .3s cubic-bezier(0, .5, .5, 1), -webkit-border-radius .2s cubic-bezier(0, .5, 0, 1);
+            transition:         transform .3s cubic-bezier(0, .5, .5, 1),         border-radius .2s cubic-bezier(0, .5, 0, 1);
+}
+.zen2 .button:active,
+.zen2.play .button {
+    -webkit-transform:  scale(.5);
+            transform:  scale(.5);
+    
+    background: hsla(0, 0%, 40%, 1);
+    background: #000 -webkit-gradient(radial, center top, 200, center top, 20, from(hsla(0, 0%, 100%, 0)), to(hsla(0, 0%, 100%, .48)));   
+    background: #000 -webkit-radial-gradient(50% 0 180deg, circle farthest-side, rgba(255, 255, 255, 0.5) 20%, rgba(255, 255, 255, .28) 100%);
+    background: #000         radial-gradient(50% 0 180deg, circle farthest-side, rgba(255, 255, 255, 0.5) 20%, rgba(255, 255, 255, .28) 100%);
+    -webkit-box-shadow: inset rgba(0, 0, 0, 0.5) 0 -4px 4px 1px, inset rgba(252, 255, 255, 0.2) 0 6px 4px -2px, rgba(0, 0, 0, .6) 0 4px 4px 1px; 
+            box-shadow: inset rgba(0, 0, 0, 0.5) 0 -4px 4px 1px, inset rgba(252, 255, 255, 0.2) 0 6px 4px -2px, rgba(0, 0, 0, .6) 0 4px 4px 1px; 
+    -webkit-transition: -webkit-transform .2s cubic-bezier(0,.5,0,1), -webkit-border-radius 1s cubic-bezier(0,.5,0,1);
+            transition:         transform .2s cubic-bezier(0,.5,0,1),         border-radius 1s cubic-bezier(0,.5,0,1);
+}
+.zen2 .button:active,
+.zen2.play .button:active {
+    -webkit-transform:  scale(.5);  
+            transform:  scale(.5);  
+}
+.zen2.play .button {
+    border-radius: 30px;
+    -webkit-transform:  scale(.54);
+            transform:  scale(.54); 
+}
+
+/* icon */
+.zen2 .button .icon {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100px;
+}
+.zen2 .button .icon.play {
+    background: url('../images/play.png') no-repeat;
+    -webkit-transition: opacity 1s cubic-bezier(.5, .5, .5, 1);    
+            transition: opacity 1s cubic-bezier(.5, .5, .5, 1);    
+}
+.zen2.play .button .play {
+    opacity: 0;
+    -webkit-transition: none;
+            transition: none;
+}
+.zen2 .button .icon.pause {
+    opacity: 0; 
+    background: url('../images/pause.png') no-repeat;
+}
+.zen2.play .button .pause {
+    opacity: 1;
+    -webkit-transition: opacity 1s cubic-bezier(.5, .5, .5, 1);    
+            transition: opacity 1s cubic-bezier(.5, .5, .5, 1);    
+}
+
+/* drag */
+.zen2 .drag {
+    display: block;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    cursor: -webkit-grab;
+    cursor: grab;
+}
+.zen2 .drag:active {
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
+}
+
+/* buffer */
+.zen2 .buffer {
+    display: block;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: url('../images/buffer.png') no-repeat;
+}
+.zen2 .buffer.loaded {
+    opacity: 0;
+    -webkit-transition: opacity .5s;
+            transition: opacity .5s;
+}
+
+/* progress */
+.zen2 .progress {
+    display: block;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: url('../images/progress.png') no-repeat;
+    opacity: .85;
+}
+
+/* circle */
+.zen2 .circle {
+    display: block;
+    position: absolute;
+    width: 98px;
+    height: 98px;
+    margin: 1px;
+    border-radius: 50px;
+    background: url('../images/circle-still.png');
+    background: url('../images/circle.png') no-repeat, -webkit-gradient(radial, center center, 35, center center, 15, from(hsla(200, 100%, 0%, 0)), to(hsla(200, 100%, 0%, 1)));
+    background: url('../images/circle.png') no-repeat, -webkit-radial-gradient(50% 50%, hsla(200, 100%, 0%, 1), hsla(200, 100%, 0%, 1), hsla(200, 100%, 0%, 0) 50%);
+    background: url('../images/circle.png') no-repeat,         radial-gradient(50% 50%, hsla(200, 100%, 0%, 1), hsla(200, 100%, 0%, 1), hsla(200, 100%, 0%, 0) 50%);
+    background-color: hsl(100, 100%, 60%);
+            box-shadow: inset rgba(0, 0, 0, .5) 0 0 5px 3px;
+    -webkit-transform:  scale(.7) rotate(-180deg);
+            transform:  scale(.7) rotate(-180deg);
+    -webkit-transition: all .5s ease-in;    
+            transition: all .5s ease-in;
+}
+.zen2.play .circle {
+    background-color: hsl(200, 100%, 60%);    
+    -webkit-transform: scale(1) rotate(0deg);
+            transform: scale(1) rotate(0deg);
+    -webkit-transition: -webkit-transform 1s cubic-bezier(0, .5, 0, 1), background-color .6s linear;
+            transition:         transform 1s cubic-bezier(0, .5, 0, 1), background-color .6s linear;
+/*    -webkit-animation: rotate 20s linear infinite 1s;
+            animation: rotate 20s linear infinite 1s;  */ 
+}
+@-webkit-keyframes rotate {
+    0%   { -webkit-transform: rotate(   0deg); } 
+    100% { -webkit-transform: rotate(-360deg); }
+}
+@keyframes rotate {
+    0%   { transform: rotate(   0deg); } 
+    100% { transform: rotate(-360deg); }
+}
+.zen2.play .circle.rotate {
+    -webkit-animation: rotate 20s linear infinite;
+            animation: rotate 20s linear infinite;  
+}
