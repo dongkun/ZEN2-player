@@ -20,8 +20,8 @@ $(function() {
         '$button': $('.zen2 .button'),
         '$drag': $('.zen2 .drag'),
         'oAudio': {
-            m4a: 'http://source1.sinaapp.com/audio/Miaow-07-Bubble.m4a',
-            oga: 'http://source1.sinaapp.com/audio/Miaow-07-Bubble.ogg'
+            m4a: 'http://source1.sinaapp.com/audio/alifetimeoflove.m4a',
+            oga: 'http://source1.sinaapp.com/audio/alifetimeoflove.ogg'
         },
         init: function() {
             var that = this;
